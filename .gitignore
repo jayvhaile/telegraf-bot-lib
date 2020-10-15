@@ -1,0 +1,5 @@
+node_modules
+test_bot
+publish.bat
+session.json
+*.ts
