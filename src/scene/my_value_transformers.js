@@ -6,6 +6,9 @@ var MyValueTransformers = /** @class */ (function () {
     MyValueTransformers.text = function () {
         return function (ctx) { return ctx.message.text; };
     };
+    MyValueTransformers.contact = function () {
+        return function (ctx) { return ctx.message.contact; };
+    };
     MyValueTransformers.media = function () {
         return function (ctx) {
             var _a, _b;

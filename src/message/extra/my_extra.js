@@ -63,11 +63,11 @@ var MyExtra = /** @class */ (function () {
                 m.forceReply(true);
             }
             else if (_this.markup instanceof my_button_board_1.MyButtonBoard) {
-                if (_this.markup.buttons[0][0] instanceof my_keyboard_button_1.KeyboardButton) {
+                if (_this.markup.buttons[0][0] instanceof my_keyboard_button_1.MyKeyboardButton) {
                     var buttons = _this.markup.buttons;
                     m.keyboard(buttons.map(function (row) { return row.map(function (btn) { return btn.build(ctx, m); }); }));
                 }
-                else if (_this.markup.buttons[0][0] instanceof my_inline_button_1.InlineButton) {
+                else if (_this.markup.buttons[0][0] instanceof my_inline_button_1.MyInlineButton) {
                     var buttons = _this.markup.buttons;
                     m.inlineKeyboard(buttons.map(function (row) { return row.map(function (btn) { return btn.build(ctx, m); }); }), {});
                 }
@@ -108,11 +108,11 @@ function joinMarkups(mm) {
         return OtherMarkups.FORCE_REPLY;
     if (markups.every(function (m) { return m instanceof my_button_board_1.MyButtonBoard; })) {
         if (markups.filter(function (m) { return !m.isEmpty; })
-            .every(function (m) { return m.first instanceof my_inline_button_1.InlineButton; })) {
+            .every(function (m) { return m.first instanceof my_inline_button_1.MyInlineButton; })) {
             return my_button_board_1.MyButtonBoard.joinAll(markups.map(function (m) { return m; }));
         }
         if (markups.filter(function (m) { return !m.isEmpty; })
-            .every(function (m) { return m.first instanceof my_keyboard_button_1.KeyboardButton; })) {
+            .every(function (m) { return m.first instanceof my_keyboard_button_1.MyKeyboardButton; })) {
             return my_button_board_1.MyButtonBoard.joinAll(markups.map(function (m) { return m; }));
         }
     }

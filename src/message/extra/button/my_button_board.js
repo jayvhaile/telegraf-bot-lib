@@ -63,6 +63,9 @@ var MyButtonBoard = /** @class */ (function () {
     MyButtonBoard.empty = function () {
         return new MyButtonBoard([]);
     };
+    MyButtonBoard.single = function (button) {
+        return new MyButtonBoard([[button]]);
+    };
     MyButtonBoard.horizontal = function (buttons) {
         return new MyButtonBoard([buttons]);
     };

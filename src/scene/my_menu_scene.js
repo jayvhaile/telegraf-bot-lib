@@ -118,7 +118,8 @@ var MyScene = /** @class */ (function (_super) {
                         case 0:
                             text = ctx.message.text;
                             if (!text) return [3 /*break*/, 3];
-                            action = utils_1.flatArray(param.actionButtons).find(function (k) { return k.button.label == text; });
+                            action = param.actionButtons.filter(function (k) { return !utils_1.unwrap(k.button.hide, ctx); })
+                                .find(function (k) { return utils_1.unwrap(k.button.label, ctx) == text; });
                             if (!action) return [3 /*break*/, 3];
                             return [4 /*yield*/, action.action(ctx)];
                         case 1:

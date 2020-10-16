@@ -1,9 +1,12 @@
 {
   "name": "@jvhaile/telegraf-bot-lib",
-  "version": "0.0.1",
+  "version": "0.0.7",
   "description": "Library for making telegraf easier",
-  "main": "index.js",
+  "main": "./src/index.js",
   "types": "index.d.ts",
+  "files": [
+    "/src"
+  ],
   "engines": {
     "node": ">=6"
   },

@@ -70,7 +70,7 @@ var StepResult;
     StepResult[StepResult["BACK"] = 1] = "BACK";
     StepResult[StepResult["LEAVE"] = 2] = "LEAVE";
     StepResult[StepResult["STAY"] = 3] = "STAY";
-    StepResult[StepResult["SKIP"] = 4] = "SKIP";
+    StepResult[StepResult["FREEZE"] = 4] = "FREEZE";
 })(StepResult = exports.StepResult || (exports.StepResult = {}));
 var MyStep = /** @class */ (function () {
     function MyStep(name, validators, valueTransformer, onEnter, onMessage, onDone) {
@@ -97,7 +97,7 @@ var MyStep = /** @class */ (function () {
                 return __generator(this, function (_b) {
                     switch (_b.label) {
                         case 0: return [4 /*yield*/, new my_message_1.MyMessage(my_body_1.default.from(param), my_extra_1.default.from({
-                                markup: my_extra_1.joinMarkups([my_button_board_1.MyButtonBoard.fixedColumn(param.choices.map(function (c) { return my_keyboard_button_1.KeyboardButton.text(utils_1.unwrap(c, ctx)); }), param.columnCount || 2), navKeyboard(param), param.markup])
+                                markup: my_extra_1.joinMarkups([my_button_board_1.MyButtonBoard.fixedColumn(param.choices.map(function (c) { return my_keyboard_button_1.MyKeyboardButton.text(utils_1.unwrap(c, ctx)); }), param.columnCount || 2), navKeyboard(param), param.markup])
                             })).reply(ctx)];
                         case 1:
                             _b.sent();
@@ -122,9 +122,7 @@ var MyStep = /** @class */ (function () {
                 var _a;
                 return __generator(this, function (_b) {
                     switch (_b.label) {
-                        case 0:
-                            console.log("ON ENTER STEP");
-                            return [4 /*yield*/, new my_message_1.MyMessage(my_body_1.default.from(param), my_extra_1.default.from(__assign(__assign({}, param), { markup: my_extra_1.joinMarkups([param.markup, navKeyboard(param)]) }))).reply(ctx)];
+                        case 0: return [4 /*yield*/, new my_message_1.MyMessage(my_body_1.default.from(param), my_extra_1.default.from(__assign(__assign({}, param), { markup: my_extra_1.joinMarkups([param.markup, navKeyboard(param)]) }))).reply(ctx)];
                         case 1:
                             _b.sent();
                             return [4 /*yield*/, ((_a = param.onEnter) === null || _a === void 0 ? void 0 : _a.call(ctx))];
@@ -134,7 +132,11 @@ var MyStep = /** @class */ (function () {
                     }
                 });
             }); },
-            onMessage: navHandler(param),
+            onMessage: function (ctx) {
+                var _a;
+                var res = ((_a = param.onMessage) === null || _a === void 0 ? void 0 : _a.call(param, ctx)) || StepResult.STAY;
+                return res == StepResult.STAY ? navHandler(param)(ctx) : res;
+            },
             onDone: param.onDone,
         });
     };
@@ -147,22 +149,22 @@ var MyStep = /** @class */ (function () {
         return this.simple(__assign(__assign({}, param), { valueTransformer: param.valueTransformer || my_value_transformers_1.default.media() }));
     };
     MyStep.photo = function (param) {
-        return this.media(__assign(__assign({}, param), { validators: __spreadArrays([my_validators_1.default.photo(param.errorMessage)], param.validators) }));
+        return this.media(__assign(__assign({}, param), { validators: __spreadArrays([my_validators_1.default.photo(param.errorMessage)], (param.validators || [])) }));
     };
     MyStep.video = function (param) {
-        return this.media(__assign(__assign({}, param), { validators: __spreadArrays([my_validators_1.default.video(param.errorMessage)], param.validators) }));
+        return this.media(__assign(__assign({}, param), { validators: __spreadArrays([my_validators_1.default.video(param.errorMessage)], (param.validators || [])) }));
     };
     MyStep.audio = function (param) {
-        return this.media(__assign(__assign({}, param), { validators: __spreadArrays([my_validators_1.default.audio(param.errorMessage)], param.validators) }));
+        return this.media(__assign(__assign({}, param), { validators: __spreadArrays([my_validators_1.default.audio(param.errorMessage)], (param.validators || [])) }));
     };
     MyStep.voice = function (param) {
-        return this.media(__assign(__assign({}, param), { validators: __spreadArrays([my_validators_1.default.voice(param.errorMessage)], param.validators) }));
+        return this.media(__assign(__assign({}, param), { validators: __spreadArrays([my_validators_1.default.voice(param.errorMessage)], (param.validators || [])) }));
     };
     MyStep.document = function (param) {
-        return this.media(__assign(__assign({}, param), { validators: __spreadArrays([my_validators_1.default.document(param.errorMessage)], param.validators) }));
+        return this.media(__assign(__assign({}, param), { validators: __spreadArrays([my_validators_1.default.document(param.errorMessage)], (param.validators || [])) }));
     };
     MyStep.contact = function (param) {
-        return this.media(__assign(__assign({}, param), { validators: __spreadArrays([my_validators_1.default.document(param.errorMessage)], param.validators) }));
+        return this.simple(__assign(__assign({}, param), { validators: __spreadArrays([my_validators_1.default.contact(param.errorMessage)], (param.validators || [])), valueTransformer: param.valueTransformer || my_value_transformers_1.default.contact() }));
     };
     return MyStep;
 }());
@@ -183,9 +185,9 @@ function navHandler(navParams) {
 }
 function navKeyboard(params) {
     return my_button_board_1.MyButtonBoard.fixedColumn([
-        params.includeBack ? my_keyboard_button_1.KeyboardButton.text(params.back || consts_1.DEFAULT_STEP_BACK) : null,
-        params.includeSkip ? my_keyboard_button_1.KeyboardButton.text(params.skip || consts_1.DEFAULT_STEP_SKIP) : null,
-        params.includeExit ? my_keyboard_button_1.KeyboardButton.text(params.exit || consts_1.DEFAULT_STEP_EXIT) : null,
+        params.includeBack ? my_keyboard_button_1.MyKeyboardButton.text(params.back || consts_1.DEFAULT_STEP_BACK) : null,
+        params.includeSkip ? my_keyboard_button_1.MyKeyboardButton.text(params.skip || consts_1.DEFAULT_STEP_SKIP) : null,
+        params.includeExit ? my_keyboard_button_1.MyKeyboardButton.text(params.exit || consts_1.DEFAULT_STEP_EXIT) : null,
     ].filter(function (v) { return v; }), 2);
 }
 //# sourceMappingURL=my_step.js.map

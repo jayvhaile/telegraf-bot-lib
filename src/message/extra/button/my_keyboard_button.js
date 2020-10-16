@@ -13,26 +13,26 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.LocationRequestKeyboardButton = exports.ContactRequestKeyboardButton = exports.TextKeyboardButton = exports.KeyboardButton = void 0;
+exports.LocationRequestKeyboardButton = exports.ContactRequestKeyboardButton = exports.TextKeyboardButton = exports.MyKeyboardButton = void 0;
 var utils_1 = require("../../../utils");
-var KeyboardButton = /** @class */ (function () {
-    function KeyboardButton() {
+var MyKeyboardButton = /** @class */ (function () {
+    function MyKeyboardButton() {
     }
-    KeyboardButton.text = function (label, hide) {
+    MyKeyboardButton.text = function (label, hide) {
         if (hide === void 0) { hide = false; }
         return new TextKeyboardButton(label, hide);
     };
-    KeyboardButton.contact = function (label, hide) {
+    MyKeyboardButton.contact = function (label, hide) {
         if (hide === void 0) { hide = false; }
         return new ContactRequestKeyboardButton(label, hide);
     };
-    KeyboardButton.location = function (label, hide) {
+    MyKeyboardButton.location = function (label, hide) {
         if (hide === void 0) { hide = false; }
         return new LocationRequestKeyboardButton(label, hide);
     };
-    return KeyboardButton;
+    return MyKeyboardButton;
 }());
-exports.KeyboardButton = KeyboardButton;
+exports.MyKeyboardButton = MyKeyboardButton;
 var TextKeyboardButton = /** @class */ (function (_super) {
     __extends(TextKeyboardButton, _super);
     function TextKeyboardButton(label, hide) {
@@ -45,7 +45,7 @@ var TextKeyboardButton = /** @class */ (function (_super) {
         return m.button(utils_1.unwrap(this.label, ctx), utils_1.unwrap(this.hide, ctx));
     };
     return TextKeyboardButton;
-}(KeyboardButton));
+}(MyKeyboardButton));
 exports.TextKeyboardButton = TextKeyboardButton;
 var ContactRequestKeyboardButton = /** @class */ (function (_super) {
     __extends(ContactRequestKeyboardButton, _super);
@@ -59,7 +59,7 @@ var ContactRequestKeyboardButton = /** @class */ (function (_super) {
         return m.contactRequestButton(utils_1.unwrap(this.label, ctx), utils_1.unwrap(this.hide, ctx));
     };
     return ContactRequestKeyboardButton;
-}(KeyboardButton));
+}(MyKeyboardButton));
 exports.ContactRequestKeyboardButton = ContactRequestKeyboardButton;
 var LocationRequestKeyboardButton = /** @class */ (function (_super) {
     __extends(LocationRequestKeyboardButton, _super);
@@ -73,6 +73,6 @@ var LocationRequestKeyboardButton = /** @class */ (function (_super) {
         return m.locationRequestButton(utils_1.unwrap(this.label, ctx), utils_1.unwrap(this.hide, ctx));
     };
     return LocationRequestKeyboardButton;
-}(KeyboardButton));
+}(MyKeyboardButton));
 exports.LocationRequestKeyboardButton = LocationRequestKeyboardButton;
 //# sourceMappingURL=my_keyboard_button.js.map

@@ -13,21 +13,21 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.InlineURLButton = exports.InlineCallbackButton = exports.InlineButton = void 0;
+exports.InlineURLButton = exports.InlineCallbackButton = exports.MyInlineButton = void 0;
 var utils_1 = require("../../../utils");
 var consts_1 = require("../../../consts");
-var InlineButton = /** @class */ (function () {
-    function InlineButton() {
+var MyInlineButton = /** @class */ (function () {
+    function MyInlineButton() {
     }
-    InlineButton.callback = function (param) {
+    MyInlineButton.callback = function (param) {
         return new InlineCallbackButton(param.id, param.label, param.data, param.hide || false);
     };
-    InlineButton.url = function (param) {
+    MyInlineButton.url = function (param) {
         return new InlineURLButton(param.id, param.label, param.url, param.hide || false);
     };
-    return InlineButton;
+    return MyInlineButton;
 }());
-exports.InlineButton = InlineButton;
+exports.MyInlineButton = MyInlineButton;
 var InlineCallbackButton = /** @class */ (function (_super) {
     __extends(InlineCallbackButton, _super);
     function InlineCallbackButton(id, label, data, hide) {
@@ -45,7 +45,7 @@ var InlineCallbackButton = /** @class */ (function (_super) {
         return m.callbackButton(text, "" + this.id + consts_1.DATA_SEPARATOR + data, hide);
     };
     return InlineCallbackButton;
-}(InlineButton));
+}(MyInlineButton));
 exports.InlineCallbackButton = InlineCallbackButton;
 var InlineURLButton = /** @class */ (function (_super) {
     __extends(InlineURLButton, _super);
@@ -64,6 +64,6 @@ var InlineURLButton = /** @class */ (function (_super) {
         return m.urlButton(text, "" + (this.id || '') + (this.id ? consts_1.DATA_SEPARATOR : '') + url, hide);
     };
     return InlineURLButton;
-}(InlineButton));
+}(MyInlineButton));
 exports.InlineURLButton = InlineURLButton;
 //# sourceMappingURL=my_inline_button.js.map
