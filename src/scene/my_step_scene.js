@@ -208,7 +208,8 @@ var MyStepScene = /** @class */ (function (_super) {
         });
     };
     MyStepScene.prototype.onLeaveScene = function (ctx) {
-        return this.onLeave(ctx);
+        var _a;
+        return (_a = this.onLeave) === null || _a === void 0 ? void 0 : _a.call(this, ctx);
     };
     return MyStepScene;
 }(my_scene_1.MyBaseScene));

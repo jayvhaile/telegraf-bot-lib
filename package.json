@@ -1,6 +1,6 @@
 {
   "name": "@jvhaile/telegraf-bot-lib",
-  "version": "0.0.7",
+  "version": "0.0.9",
   "description": "Library for making telegraf easier",
   "main": "./src/index.js",
   "types": "index.d.ts",

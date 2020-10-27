@@ -150,7 +150,7 @@ var Router = /** @class */ (function () {
         var route = this.findRoute(ctx, to.path) || this.defaultRoute;
         if (!route)
             return to;
-        var next = (_b = (_a = route.guard) === null || _a === void 0 ? void 0 : _a.call(route, this.history.head(ctx), to)) !== null && _b !== void 0 ? _b : to;
+        var next = (_b = (_a = route.guard) === null || _a === void 0 ? void 0 : _a.call(route, ctx, this.history.head(ctx), to)) !== null && _b !== void 0 ? _b : to;
         return to != next ? this.getNext(ctx, next) : next;
     };
     Router.prototype.enterLocation = function (ctx, t, replace, pop) {
